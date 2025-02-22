@@ -1,9 +1,7 @@
 package ru.appline.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.sun.org.apache.xpath.internal.objects.XString;
+import org.springframework.web.bind.annotation.*;
 import ru.appline.logic.Pet;
 import ru.appline.logic.PetModel;
 
@@ -18,6 +16,8 @@ public class Controller {
     @PostMapping(value = "/createPet", consumes = "application/json")
     public void createPet(@RequestBody Pet pet) {
         petModel.add(pet, newId.getAndIncrement());
+        String s = "Your Pet was successfully created"
+                return s
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -30,5 +30,18 @@ public class Controller {
         return petModel.getFromList(id.get("id"));
     }
 
+    @DeleteMapping(value = "/deletePet", consumes = "application/json", produces = "application/json")
+    public void deletePet(@RequestBody int pet) {
+        petModel.delete(pet)
+                String b = "Your Pet was deleted"
+                        return b
+    }
+
+    @PutMapping(value = "/updatePet", consumes = "application/json", produces = "application/json")
+    public void updatePet(@RequestBody int pet, String type, String name, int age) {
+        petModel.update(pet)
+                String a = "Your Pet was updated"
+                        return a
+    }
 
 }

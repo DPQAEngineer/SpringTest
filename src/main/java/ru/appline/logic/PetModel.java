@@ -29,4 +29,10 @@ public class PetModel implements Serializable {
          return this.model;
      }
 
-}
+    public void delete(int id) {
+        model.remove(id);
+    }
+
+    public void update(Pet pet, int id) {
+        model.replace(id, pet);
+    }
