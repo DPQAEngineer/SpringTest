@@ -1,6 +1,7 @@
 package ru.appline.controller;
 
 import com.sun.org.apache.xpath.internal.objects.XString;
+import org.mockito.internal.hamcrest.MatcherGenericTypeExtractor;
 import org.springframework.web.bind.annotation.*;
 import ru.appline.logic.Pet;
 import ru.appline.logic.PetModel;
@@ -14,15 +15,9 @@ public class Controller {
     private static final AtomicInteger newId = new AtomicInteger(1);
 
     @PostMapping(value = "/createPet", consumes = "application/json")
-    public void createPet(@RequestBody Pet pet) {
+    public String createPet(@RequestBody Pet pet) {
         petModel.add(pet, newId.getAndIncrement());
-        String s = "Your Pet was successfully created"
-                return s
-    }
-
-    @GetMapping(value = "/getAll", produces = "application/json")
-    public Map<Integer, Pet> getAll() {
-        return petModel.getAll();
+        return "Your Pet was successfully created";
     }
 
     @GetMapping(value = "/getPet", consumes = "application/json", produces = "application/json")
@@ -30,18 +25,21 @@ public class Controller {
         return petModel.getFromList(id.get("id"));
     }
 
+
+    @GetMapping(value = "/getAll", produces = "application/json")
+    public Map<Integer, Pet> getAll() {
+        return petModel.getAll();
+    }
+
+
     @DeleteMapping(value = "/deletePet", consumes = "application/json", produces = "application/json")
-    public void deletePet(@RequestBody int pet) {
-        petModel.delete(pet)
-                String b = "Your Pet was deleted"
-                        return b
+    public Pet deletePet(@RequestBody Map<String, Integer> id) {
+        return petModel.deleteFromList(id.get("id"));
     }
 
     @PutMapping(value = "/updatePet", consumes = "application/json", produces = "application/json")
-    public void updatePet(@RequestBody int pet, String type, String name, int age) {
-        petModel.update(pet)
-                String a = "Your Pet was updated"
-                        return a
+    public String updatePet(@RequestBody Pet pet, int id) {
+        petModel.updateFromList(pet, id);
+        return "Pet was updated";
     }
-
 }

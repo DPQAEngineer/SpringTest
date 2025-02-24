@@ -38,12 +38,11 @@ public class Pet {
         this.type = type;
     }
 
+
     public Integer getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+    public void setAge(Integer age) { this.age = age; }
 
 }

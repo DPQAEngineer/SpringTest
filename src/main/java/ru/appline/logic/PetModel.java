@@ -9,30 +9,32 @@ public class PetModel implements Serializable {
 
     private final Map<Integer, Pet> model;
 
-     public PetModel() {
-         model = new HashMap<Integer, Pet>();
-     }
 
-     public static PetModel getInstance() {
-         return Instance;
-     }
-
-     public void add(Pet pet, int id) {
-         model.put(id, pet);
-     }
-
-     public Pet getFromList(int id) {
-         return model.get(id);
-     }
-
-     public Map<Integer, Pet> getAll() {
-         return this.model;
-     }
-
-    public void delete(int id) {
-        model.remove(id);
+    public PetModel() {
+        model = new HashMap<Integer, Pet>();
     }
 
-    public void update(Pet pet, int id) {
-        model.replace(id, pet);
+    public static PetModel getInstance() {
+        return Instance;
     }
+
+    public void add(Pet pet, int id) {
+        model.put(id, pet);
+    }
+
+    public Pet getFromList(int id) {
+        return model.get(id);
+    }
+
+    public Map<Integer, Pet> getAll() {
+        return this.model;
+    }
+
+    public Pet deleteFromList(int id) {
+        return model.remove(id);
+    }
+
+    public Pet updateFromList(Pet pet, int id) {
+        return model.replace(id, pet);
+    }
+}
